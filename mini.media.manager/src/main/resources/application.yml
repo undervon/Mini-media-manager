@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: MINI_MEDIA_MANAGER
+  profiles:
+    active: aws
+
+server:
+  port: 8090
