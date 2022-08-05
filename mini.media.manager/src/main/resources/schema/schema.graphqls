@@ -1,0 +1,31 @@
+type Query {
+    getPosts: [Post]
+}
+
+type Mutation {
+    login(credentials: Credentials): String
+    addPost(description: String, imageInput: String): Post
+#    addPost(description: String, imageInput: Upload!): Post
+    deletePosts: String
+}
+
+# Login
+input Credentials {
+    email: String
+    password: String
+}
+#
+
+# Get Post
+type Image {
+    url: String
+}
+
+type Post {
+    id: String
+    image: Image
+    description: String
+}
+#
+
+#scalar Upload
