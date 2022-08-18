@@ -18,15 +18,26 @@ aws configure list
 
 # waiting for tables and bucket to be created
 sleep 1
-aws s3 mb s3://media-bucket --endpoint-url "$LOCALSTACK_URL"
-aws dynamodb create-table --cli-input-json file:////docker-entrypoint-initdb.d/post_table.json --endpoint-url "$LOCALSTACK_URL"
-aws dynamodb create-table --cli-input-json file:////docker-entrypoint-initdb.d/user_table.json --endpoint-url "$LOCALSTACK_URL"
+aws s3 mb s3://media-bucket \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb create-table \
+  --cli-input-json file:////docker-entrypoint-initdb.d/post_table.json \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb create-table \
+  --cli-input-json file:////docker-entrypoint-initdb.d/user_table.json \
+  --endpoint-url "$LOCALSTACK_URL"
 
 # print resources for validation
 sleep 1
-aws s3 ls --endpoint-url "$LOCALSTACK_URL"
-aws dynamodb list-tables --endpoint-url "$LOCALSTACK_URL"
-aws dynamodb describe-table --table-name posts --endpoint-url "$LOCALSTACK_URL"
-aws dynamodb describe-table --table-name users --endpoint-url "$LOCALSTACK_URL"
+aws s3 ls \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb list-tables \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb describe-table \
+  --table-name Post \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb describe-table \
+  --table-name User \
+  --endpoint-url "$LOCALSTACK_URL"
 
 echo "Resources created and ready!"

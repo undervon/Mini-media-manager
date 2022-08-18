@@ -1,5 +1,5 @@
 {
-  "TableName": "users",
+  "TableName": "User",
   "AttributeDefinitions": [
     {
       "AttributeName": "id",

@@ -2,7 +2,7 @@ spring:
   application:
     name: MINI_MEDIA_MANAGER
   profiles:
-    active: aws
+    active: localstack-aws
 
 server:
   port: 8090

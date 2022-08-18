@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Image {
+public class AddPostInput {
 
-    private String url;
+    private String title;
+    private String image;
+    private String description;
 }

@@ -12,13 +12,13 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @DgsComponent
 @RequiredArgsConstructor
-public class LoginDatafetcher {
+public class LoginDataFetcher {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @DgsMutation
     public String login(@InputArgument Credentials credentials) {
-        log.info("login, Credentials: {}", credentials);
+        log.info("login, {}", credentials);
 
         if (!userRepository.existsUserByEmailAndPassword(credentials.getEmail(), credentials.getPassword())) {
             throw new BadCredentialsException();
