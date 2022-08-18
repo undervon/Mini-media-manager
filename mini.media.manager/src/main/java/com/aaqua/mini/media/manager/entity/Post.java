@@ -1,6 +1,6 @@
-package com.aaqua.mini.media.manager.entities;
+package com.aaqua.mini.media.manager.entity;
 
-import com.aaqua.mini.media.manager.models.Image;
+import com.aaqua.mini.media.manager.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

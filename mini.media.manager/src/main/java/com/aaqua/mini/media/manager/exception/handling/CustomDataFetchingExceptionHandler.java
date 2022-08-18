@@ -1,8 +1,8 @@
-package com.aaqua.mini.media.manager.exceptions.handling;
+package com.aaqua.mini.media.manager.exception.handling;
 
-import com.aaqua.mini.media.manager.exceptions.BadCredentialsException;
-import com.aaqua.mini.media.manager.exceptions.GenericException;
-import com.aaqua.mini.media.manager.exceptions.PostNotFoundException;
+import com.aaqua.mini.media.manager.exception.BadCredentialsException;
+import com.aaqua.mini.media.manager.exception.GenericException;
+import com.aaqua.mini.media.manager.exception.PostNotFoundException;
 import com.netflix.graphql.types.errors.ErrorType;
 import com.netflix.graphql.types.errors.TypedGraphQLError;
 import graphql.GraphQLError;

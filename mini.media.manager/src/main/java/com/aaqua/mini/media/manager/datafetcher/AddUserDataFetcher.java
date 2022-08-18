@@ -1,8 +1,8 @@
-package com.aaqua.mini.media.manager.datafetchers;
+package com.aaqua.mini.media.manager.datafetcher;
 
-import com.aaqua.mini.media.manager.entities.User;
-import com.aaqua.mini.media.manager.models.Credentials;
-import com.aaqua.mini.media.manager.repositories.UserRepository;
+import com.aaqua.mini.media.manager.entity.User;
+import com.aaqua.mini.media.manager.model.Credentials;
+import com.aaqua.mini.media.manager.repository.UserRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.InputArgument;

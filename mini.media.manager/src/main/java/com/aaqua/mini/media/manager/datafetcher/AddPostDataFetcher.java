@@ -1,10 +1,10 @@
-package com.aaqua.mini.media.manager.datafetchers;
+package com.aaqua.mini.media.manager.datafetcher;
 
-import com.aaqua.mini.media.manager.entities.Post;
-import com.aaqua.mini.media.manager.exceptions.GenericException;
-import com.aaqua.mini.media.manager.models.AddPostInput;
-import com.aaqua.mini.media.manager.models.Image;
-import com.aaqua.mini.media.manager.repositories.PostRepository;
+import com.aaqua.mini.media.manager.entity.Post;
+import com.aaqua.mini.media.manager.exception.GenericException;
+import com.aaqua.mini.media.manager.model.AddPostInput;
+import com.aaqua.mini.media.manager.model.Image;
+import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.InputArgument;

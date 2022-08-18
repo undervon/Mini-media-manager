@@ -1,6 +1,6 @@
-package com.aaqua.mini.media.manager.datafetchers;
+package com.aaqua.mini.media.manager.datafetcher;
 
-import com.aaqua.mini.media.manager.repositories.PostRepository;
+import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.InputArgument;

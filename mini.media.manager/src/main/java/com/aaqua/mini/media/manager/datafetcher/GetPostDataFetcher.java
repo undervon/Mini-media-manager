@@ -1,8 +1,8 @@
-package com.aaqua.mini.media.manager.datafetchers;
+package com.aaqua.mini.media.manager.datafetcher;
 
-import com.aaqua.mini.media.manager.entities.Post;
-import com.aaqua.mini.media.manager.exceptions.PostNotFoundException;
-import com.aaqua.mini.media.manager.repositories.PostRepository;
+import com.aaqua.mini.media.manager.entity.Post;
+import com.aaqua.mini.media.manager.exception.PostNotFoundException;
+import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;

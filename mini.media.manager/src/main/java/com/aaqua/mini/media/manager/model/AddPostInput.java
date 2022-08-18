@@ -1,4 +1,4 @@
-package com.aaqua.mini.media.manager.models;
+package com.aaqua.mini.media.manager.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
