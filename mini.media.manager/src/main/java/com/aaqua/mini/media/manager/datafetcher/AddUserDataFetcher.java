@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class AddUserDataFetcher {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @DgsMutation
     public User addUser(@InputArgument String id, @InputArgument Credentials credentials) {

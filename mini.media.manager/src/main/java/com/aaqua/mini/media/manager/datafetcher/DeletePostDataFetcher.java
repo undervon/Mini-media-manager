@@ -1,5 +1,6 @@
 package com.aaqua.mini.media.manager.datafetcher;
 
+import com.aaqua.mini.media.manager.exception.PostNotFoundException;
 import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
@@ -12,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class DeletePostDataFetcher {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @DgsMutation
     public String deletePosts() {
@@ -27,7 +28,8 @@ public class DeletePostDataFetcher {
     public String deletePostById(@InputArgument String id) {
         log.info("deletePostById, id: {}", id);
 
-        postRepository.deleteById(id);
+        postRepository.deleteById(id)
+                .orElseThrow(() -> new PostNotFoundException(id));
 
         return String.format("Deleting post '%s' successfully!", id);
     }

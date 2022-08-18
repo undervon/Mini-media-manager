@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class LoginDataFetcher {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @DgsMutation
     public String login(@InputArgument Credentials credentials) {

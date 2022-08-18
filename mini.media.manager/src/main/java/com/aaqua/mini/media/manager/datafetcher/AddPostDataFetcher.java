@@ -27,9 +27,9 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 public class AddPostDataFetcher {
 
-    private S3Client s3Client;
+    private final S3Client s3Client;
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Value("${aws.s3.bucketName}")
     private String bucketName;

@@ -6,7 +6,6 @@ import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import graphql.com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -17,13 +16,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GetPostDataFetcher {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @DgsQuery
     public List<Post> getPosts() {
         log.info("getPosts");
 
-        return Lists.newArrayList(postRepository.findAll());
+        return postRepository.findAll();
     }
 
     @DgsQuery
