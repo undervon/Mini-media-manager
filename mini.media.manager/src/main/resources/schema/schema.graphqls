@@ -1,31 +1,49 @@
 type Query {
-    getPosts: [Post]
+    getPosts: [Post!]!
+    getPost(id: String!): Post!
 }
 
 type Mutation {
-    login(credentials: Credentials): String
-    addPost(description: String, imageInput: String): Post
-#    addPost(description: String, imageInput: Upload!): Post
-    deletePosts: String
+    login(credentials: Credentials!): String!
+    addPost(id: String!, addPostInput: AddPostInput!): Post!
+    addUser(id: String!, credentials: Credentials!): User!
+    deletePosts: String!
+    deletePostById(id: String!): String!
 }
 
 # Login
 input Credentials {
-    email: String
-    password: String
+    email: String!
+    password: String!
 }
 #
 
 # Get Post
 type Image {
-    url: String
+    key: String!            # the name of the image stored in the bucket
+    url: String!
 }
 
 type Post {
-    id: String
-    image: Image
-    description: String
+    id: String!
+    title: String!
+    images: [Image!]!
+    description: String!
 }
 #
 
-#scalar Upload
+# Add Post
+input AddPostInput {
+    title: String!
+    images: [String!]!
+    description: String!
+}
+#
+
+# Get User
+type User {
+    id: String!
+    email: String!
+    password: String!
+}
+#

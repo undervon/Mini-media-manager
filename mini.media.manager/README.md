@@ -6,16 +6,21 @@
 
 AWS CLI commands:
 * aws configure -> creating configuration for AWS
+    * aws configure set aws_access_key_id test-access-key
+    * aws configure set aws_secret_access_key test-secret-access-key
+    * aws configure set region eu-west-1
+    * aws configure set output json
 * aws configure list -> show AWS configuration list
 
 AWS S3:
-* aws --endpoint-url http://localhost:4566 s3 mb s3://media-bucket -> creating a new S3 bucket
-* aws --endpoint-url http://localhost:4566 s3 rb s3://media-bucket --force -> deleting an S3 bucket
+* aws s3 mb s3://media-bucket --endpoint-url http://localhost:4566 -> creating a new S3 bucket
+* aws s3 rb s3://media-bucket --force --endpoint-url http://localhost:4566 -> deleting an S3 bucket
     * https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html (aws s3 commands)
-* aws --endpoint-url http://localhost:4566 s3 ls -> printing all buckets
+* aws s3 ls --endpoint-url http://localhost:4566 -> printing all buckets
 
 AWS DynamoDB:
 * aws dynamodb create-table --cli-input-json file://post_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with post_table.json format
 * aws dynamodb create-table --cli-input-json file://user_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with user_table.json format
+* aws dynamodb list-tables --endpoint-url http://localhost:4566 -> list all tables
 * aws dynamodb describe-table --table-name posts --endpoint-url http://localhost:4566 -> ~ describe posts table
 * aws dynamodb describe-table --table-name users --endpoint-url http://localhost:4566 -> ~ describe users table

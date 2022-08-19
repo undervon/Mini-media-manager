@@ -1,7 +1,6 @@
 aws:
-  region: us-west-2
-  accessKey: accesskey
-  secretKey: secretkey
+  accessKey: test-access-key
+  secretKey: test-secret-access-key
   s3:
     endpoint: http://localhost:4566
     bucketName: media-bucket
