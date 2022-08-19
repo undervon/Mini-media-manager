@@ -19,8 +19,10 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @Log4j2
 @DgsComponent
@@ -42,9 +44,11 @@ public class AddPostDataFetcher {
             File file = ResourceUtils.getFile("classpath:images");
             Path path = Paths.get(file.getAbsolutePath()).resolve(addPostInput.getImage());
 
+            UUID key = UUID.randomUUID();
+
             s3Client.putObject(PutObjectRequest.builder()
                             .bucket(bucketName)                 // the bucket name
-                            .key(addPostInput.getImage())       // the name of the object inserted into the bucket (key)
+                            .key(key.toString())                // the name of the object inserted into the bucket (key)
                             .build(),
                     path);
 
@@ -52,10 +56,10 @@ public class AddPostDataFetcher {
                     .id(id)
                     .title(addPostInput.getTitle())
                     .image(Image.builder()
-                            .key(addPostInput.getImage())
+                            .key(key.toString())
                             .url(s3Client.utilities().getUrl(GetUrlRequest.builder()
                                             .bucket(bucketName)
-                                            .key(addPostInput.getImage())
+                                            .key(key.toString())
                                             .build())
                                     .toString())
                             .build())
@@ -63,8 +67,8 @@ public class AddPostDataFetcher {
                     .build();
 
             return postRepository.save(newPost);
-        } catch (IOException ioException) {
-            log.error(ioException.getMessage());
+        } catch (IOException | UncheckedIOException exception) {
+            log.error(exception.getMessage());
             throw new GenericException();
         } catch (S3Exception s3Exception) {
             log.error(s3Exception.awsErrorDetails().errorMessage());
