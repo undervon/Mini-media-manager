@@ -43,6 +43,16 @@ public class AddPostDataFetcher {
     public Post addPost(@InputArgument String id, @InputArgument AddPostInput addPostInput) {
         log.info("addPost, id: {}, {}", id, addPostInput);
 
+        /*
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            log.info(((UserDetails) principal).getUsername());
+        } else {
+            log.info(" - " + principal.toString());
+        }
+         */
+
         try {
             File file = ResourceUtils.getFile("classpath:images");
             List<Path> paths = addPostInput.getImages().stream()

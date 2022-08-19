@@ -17,6 +17,8 @@ AWS S3:
 * aws s3 rb s3://media-bucket --force --endpoint-url http://localhost:4566 -> deleting an S3 bucket
     * https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html (aws s3 commands)
 * aws s3 ls --endpoint-url http://localhost:4566 -> printing all buckets
+* aws s3 ls s3://media-bucket --recursive --human-readable --summarize --endpoint-url "http://localhost:4566" -> print everything from media-bucket
+* aws s3 rm s3://media-bucket --recursive --endpoint-url "http://localhost:4566" -> delete everything from media-bucket
 
 AWS DynamoDB:
 * aws dynamodb create-table --cli-input-json file://post_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with post_table.json format
