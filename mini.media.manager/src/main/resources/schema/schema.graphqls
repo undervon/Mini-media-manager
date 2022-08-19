@@ -27,7 +27,7 @@ type Image {
 type Post {
     id: String!
     title: String!
-    image: Image!
+    images: [Image!]!
     description: String!
 }
 #
@@ -35,7 +35,7 @@ type Post {
 # Add Post
 input AddPostInput {
     title: String!
-    image: String!
+    images: [String!]!
     description: String!
 }
 #

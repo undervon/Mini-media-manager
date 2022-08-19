@@ -81,10 +81,10 @@ public class DeletePostDataFetcher {
                 .orElseThrow(() -> new PostNotFoundException(id));
 
         try {
-            s3Client.deleteObject(DeleteObjectRequest.builder()
+            post.getImages().forEach(image -> s3Client.deleteObject(DeleteObjectRequest.builder()
                     .bucket(bucketName)
-                    .key(post.getImage().getKey())
-                    .build());
+                    .key(image.getKey())
+                    .build()));
         } catch (S3Exception s3Exception) {
             log.error(s3Exception.awsErrorDetails().errorMessage());
             throw new GenericException();

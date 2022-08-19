@@ -56,7 +56,7 @@ public class PostRepository {
         }
     }
 
-    public Post deleteById(final String id) {
+    public void deleteById(final String id) {
         log.info("PostRepository class -> deleteById, id: {}", id);
 
         try {
@@ -66,7 +66,7 @@ public class PostRepository {
                     .partitionValue(id)
                     .build();
 
-            return postDynamoDbTable.deleteItem(key);
+            postDynamoDbTable.deleteItem(key);
         } catch (DynamoDbException dynamoDbException) {
             log.error(dynamoDbException.awsErrorDetails().errorMessage());
             throw new GenericException();

@@ -22,7 +22,10 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Log4j2
 @DgsComponent
@@ -42,29 +45,36 @@ public class AddPostDataFetcher {
 
         try {
             File file = ResourceUtils.getFile("classpath:images");
-            Path path = Paths.get(file.getAbsolutePath()).resolve(addPostInput.getImage());
+            List<Path> paths = addPostInput.getImages().stream()
+                    .map(imageName -> Paths.get(file.getAbsolutePath()).resolve(imageName))
+                    .collect(Collectors.toList());
 
-            UUID key = UUID.randomUUID();
+            List<Image> images = new ArrayList<>();
 
-            s3Client.putObject(PutObjectRequest.builder()
-                            .bucket(bucketName)                 // the bucket name
-                            .key(key.toString())                // the name of the object inserted into the bucket (key)
-                            .build(),
-                    path);
+            for (Path path : paths) {
+                UUID key = UUID.randomUUID();
+
+                s3Client.putObject(PutObjectRequest.builder()
+                                .bucket(bucketName)                 // the bucket name
+                                .key(key.toString())                // the name of the object inserted into the bucket (key)
+                                .build(),
+                        path);
+
+                images.add(Image.builder()
+                        .key(key.toString())
+                        .url(s3Client.utilities().getUrl(GetUrlRequest.builder()
+                                        .bucket(bucketName)
+                                        .key(key.toString())
+                                        .build())
+                                .toString())
+                        .build());
+            }
 
             Post newPost = Post.builder()
                     .id(id)
                     .title(addPostInput.getTitle())
-                    .image(Image.builder()
-                            .key(key.toString())
-                            .url(s3Client.utilities().getUrl(GetUrlRequest.builder()
-                                            .bucket(bucketName)
-                                            .key(key.toString())
-                                            .build())
-                                    .toString())
-                            .build())
-                    .description(addPostInput.getDescription())
-                    .build();
+                    .images(images)
+                    .description(addPostInput.getDescription()).build();
 
             return postRepository.save(newPost);
         } catch (IOException | UncheckedIOException exception) {
