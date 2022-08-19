@@ -20,6 +20,7 @@ input Credentials {
 
 # Get Post
 type Image {
+    key: String!            # the name of the image stored in the bucket
     url: String!
 }
 

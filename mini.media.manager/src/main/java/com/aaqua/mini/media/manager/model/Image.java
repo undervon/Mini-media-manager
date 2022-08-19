@@ -13,5 +13,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 @AllArgsConstructor
 public class Image {
 
+    private String key;
     private String url;
 }

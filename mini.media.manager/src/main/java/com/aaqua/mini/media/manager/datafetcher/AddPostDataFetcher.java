@@ -43,8 +43,8 @@ public class AddPostDataFetcher {
             Path path = Paths.get(file.getAbsolutePath()).resolve(addPostInput.getImage());
 
             s3Client.putObject(PutObjectRequest.builder()
-                            .bucket(bucketName)
-                            .key(path.toFile().toString())
+                            .bucket(bucketName)                 // the bucket name
+                            .key(addPostInput.getImage())       // the name of the object inserted into the bucket (key)
                             .build(),
                     path);
 
@@ -52,9 +52,10 @@ public class AddPostDataFetcher {
                     .id(id)
                     .title(addPostInput.getTitle())
                     .image(Image.builder()
+                            .key(addPostInput.getImage())
                             .url(s3Client.utilities().getUrl(GetUrlRequest.builder()
                                             .bucket(bucketName)
-                                            .key(path.toFile().toString())
+                                            .key(addPostInput.getImage())
                                             .build())
                                     .toString())
                             .build())
