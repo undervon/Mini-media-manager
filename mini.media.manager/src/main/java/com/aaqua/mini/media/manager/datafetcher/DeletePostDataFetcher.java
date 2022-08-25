@@ -3,6 +3,7 @@ package com.aaqua.mini.media.manager.datafetcher;
 import com.aaqua.mini.media.manager.entity.Post;
 import com.aaqua.mini.media.manager.exception.GenericException;
 import com.aaqua.mini.media.manager.exception.PostNotFoundException;
+import com.aaqua.mini.media.manager.repository.ImageRepository;
 import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
@@ -30,6 +31,7 @@ public class DeletePostDataFetcher {
     private final S3Client s3Client;
 
     private final PostRepository postRepository;
+    private final ImageRepository imageRepository;
 
     @Value("${aws.s3.bucketName}")
     private String bucketName;
@@ -39,6 +41,7 @@ public class DeletePostDataFetcher {
         log.info("deletePosts");
 
         postRepository.deleteAll();
+        imageRepository.deleteAll();
 
         try {
             List<ObjectIdentifier> keys = new ArrayList<>();
@@ -81,16 +84,20 @@ public class DeletePostDataFetcher {
                 .orElseThrow(() -> new PostNotFoundException(id));
 
         try {
-            post.getImages().forEach(image -> s3Client.deleteObject(DeleteObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(image.getKey())
-                    .build()));
+            post.getAttachments().forEach(image -> {
+                imageRepository.deleteImageById(image.getId());
+
+                s3Client.deleteObject(DeleteObjectRequest.builder()
+                        .bucket(bucketName)
+                        .key(image.getId())
+                        .build());
+            });
         } catch (S3Exception s3Exception) {
             log.error(s3Exception.awsErrorDetails().errorMessage());
             throw new GenericException();
         }
 
-        postRepository.deleteById(id);
+        postRepository.deletePostById(id);
 
         return String.format("Deleting post '%s' successfully!", id);
     }

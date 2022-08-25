@@ -5,7 +5,7 @@ services:
     container_name: localstack
     environment:
       - DEBUG=true
-      - SERVICES=s3, dynamodb
+      - SERVICES=s3, dynamodb, sqs
       - AWS_DEFAULT_REGION=eu-west-1
       - DOCKER_HOST=unix:///var/run/docker.sock
       - DATA_DIR=/tmp/localstack/data
@@ -17,6 +17,7 @@ services:
       - ./init.sh:/docker-entrypoint-initaws.d/init.sh
       - ./post_table.json:/docker-entrypoint-initdb.d/post_table.json
       - ./user_table.json:/docker-entrypoint-initdb.d/user_table.json
+      - ./image_table.json:/docker-entrypoint-initdb.d/image_table.json
   
 #  mini-media-manager:
 #    image: mini-media-manager-app

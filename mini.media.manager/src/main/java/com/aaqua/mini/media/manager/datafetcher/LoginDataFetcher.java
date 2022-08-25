@@ -14,10 +14,6 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class LoginDataFetcher {
 
-    /*
-    private final AuthenticationManager authenticationManager = new SampleAuthenticationManager();
-     */
-
     private final UserRepository userRepository;
 
     @DgsMutation
@@ -27,16 +23,6 @@ public class LoginDataFetcher {
         if (!userRepository.existsUserByEmailAndPassword(credentials.getEmail(), credentials.getPassword())) {
             throw new BadCredentialsException();
         }
-
-        /*
-        Authentication request = new UsernamePasswordAuthenticationToken(
-                credentials.getEmail(),
-                credentials.getPassword()
-        );
-
-        Authentication result = authenticationManager.authenticate(request);
-        SecurityContextHolder.getContext().setAuthentication(result);
-         */
 
         return "Login successful!";
     }

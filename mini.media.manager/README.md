@@ -23,6 +23,8 @@ AWS S3:
 AWS DynamoDB:
 * aws dynamodb create-table --cli-input-json file://post_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with post_table.json format
 * aws dynamodb create-table --cli-input-json file://user_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with user_table.json format
+* aws dynamodb create-table --cli-input-json file://image_table.json --endpoint-url http://localhost:4566 -> creating DynamoDB table with image_table.json format 
 * aws dynamodb list-tables --endpoint-url http://localhost:4566 -> list all tables
-* aws dynamodb describe-table --table-name posts --endpoint-url http://localhost:4566 -> ~ describe posts table
-* aws dynamodb describe-table --table-name users --endpoint-url http://localhost:4566 -> ~ describe users table
+* aws dynamodb describe-table --table-name Post --endpoint-url http://localhost:4566 -> ~ describe Post table
+* aws dynamodb describe-table --table-name User --endpoint-url http://localhost:4566 -> ~ describe User table
+* aws dynamodb describe-table --table-name Image --endpoint-url http://localhost:4566 -> ~ describe Image table
