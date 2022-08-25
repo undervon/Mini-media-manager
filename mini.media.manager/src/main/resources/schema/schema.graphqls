@@ -5,8 +5,8 @@ type Query {
 
 type Mutation {
     login(credentials: Credentials!): String!
-    addPost(id: String!, addPostInput: AddPostInput!): Post!
-    addUser(id: String!, credentials: Credentials!): User!
+    addPost(addPostInput: AddPostInput!): Post!
+    addUser(credentials: Credentials!): User!
     deletePosts: String!
     deletePostById(id: String!): String!
     generatePresignedUrl: ResponsePresignedUrl!

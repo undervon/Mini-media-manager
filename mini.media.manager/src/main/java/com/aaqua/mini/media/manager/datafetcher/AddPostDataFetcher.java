@@ -32,6 +32,7 @@ import java.net.URLConnection;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @DgsComponent
@@ -48,8 +49,8 @@ public class AddPostDataFetcher {
     private String bucketName;
 
     @DgsMutation
-    public Post addPost(@InputArgument String id, @InputArgument AddPostInput addPostInput) {
-        log.info("addPost, id: {}, {}", id, addPostInput);
+    public Post addPost(@InputArgument AddPostInput addPostInput) {
+        log.info("addPost, {}", addPostInput);
 
         try {
             List<Image> images = new ArrayList<>();
@@ -84,8 +85,10 @@ public class AddPostDataFetcher {
                 images.add(image);
             }
 
+            UUID id = UUID.randomUUID();
+
             Post newPost = Post.builder()
-                    .id(id)
+                    .id(id.toString())
                     .title(addPostInput.getTitle())
                     .attachments(images)
                     .description(addPostInput.getDescription()).build();
