@@ -26,6 +26,9 @@ aws dynamodb create-table \
 aws dynamodb create-table \
   --cli-input-json file:////docker-entrypoint-initdb.d/user_table.json \
   --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb create-table \
+  --cli-input-json file:////docker-entrypoint-initdb.d/image_table.json \
+  --endpoint-url "$LOCALSTACK_URL"
 
 # print resources for validation
 sleep 1
@@ -38,6 +41,9 @@ aws dynamodb describe-table \
   --endpoint-url "$LOCALSTACK_URL"
 aws dynamodb describe-table \
   --table-name User \
+  --endpoint-url "$LOCALSTACK_URL"
+aws dynamodb describe-table \
+  --table-name Image \
   --endpoint-url "$LOCALSTACK_URL"
 
 echo "Resources created and ready!"

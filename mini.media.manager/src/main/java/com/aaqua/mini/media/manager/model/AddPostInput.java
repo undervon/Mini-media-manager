@@ -14,6 +14,6 @@ import java.util.List;
 public class AddPostInput {
 
     private String title;
-    private List<String> images;
     private String description;
+    private List<String> attachments;
 }

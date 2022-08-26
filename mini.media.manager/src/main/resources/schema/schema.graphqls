@@ -5,10 +5,11 @@ type Query {
 
 type Mutation {
     login(credentials: Credentials!): String!
-    addPost(id: String!, addPostInput: AddPostInput!): Post!
-    addUser(id: String!, credentials: Credentials!): User!
+    addPost(addPostInput: AddPostInput!): Post!
+    addUser(credentials: Credentials!): User!
     deletePosts: String!
     deletePostById(id: String!): String!
+    generatePresignedUrl: ResponsePresignedUrl!
 }
 
 # Login
@@ -18,32 +19,36 @@ input Credentials {
 }
 #
 
-# Get Post
+# User
+type User {
+    id: String!
+    email: String!
+    password: String!
+}
+#
+
+# Post
 type Image {
-    key: String!            # the name of the image stored in the bucket
-    url: String!
+    id: String!
+    path: String!
+    status: String!         # [PENDING | ONLINE]
 }
 
 type Post {
     id: String!
     title: String!
-    images: [Image!]!
     description: String!
+    attachments: [Image!]!
 }
-#
 
-# Add Post
 input AddPostInput {
     title: String!
-    images: [String!]!
     description: String!
+    attachments: [String!]!
 }
-#
 
-# Get User
-type User {
-    id: String!
-    email: String!
-    password: String!
+type ResponsePresignedUrl {
+    image: Image!
+    url: String!
 }
 #

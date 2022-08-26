@@ -56,8 +56,8 @@ public class PostRepository {
         }
     }
 
-    public void deleteById(final String id) {
-        log.info("PostRepository class -> deleteById, id: {}", id);
+    public void deletePostById(final String id) {
+        log.info("PostRepository class -> deletePostById, id: {}", id);
 
         try {
             DynamoDbTable<Post> postDynamoDbTable = getDynamoDbTable();

@@ -2,6 +2,7 @@ package com.aaqua.mini.media.manager.exception.handling;
 
 import com.aaqua.mini.media.manager.exception.BadCredentialsException;
 import com.aaqua.mini.media.manager.exception.GenericException;
+import com.aaqua.mini.media.manager.exception.ImageNotFoundException;
 import com.aaqua.mini.media.manager.exception.PostNotFoundException;
 import com.netflix.graphql.types.errors.ErrorType;
 import com.netflix.graphql.types.errors.TypedGraphQLError;
@@ -63,6 +64,20 @@ public class CustomDataFetchingExceptionHandler implements DataFetcherExceptionH
                     .build();
 
             log.error("thrown PostNotFoundException");
+
+            return CompletableFuture.completedFuture(result);
+        } else if (throwable instanceof ImageNotFoundException) {
+
+            GraphQLError graphqlError = TypedGraphQLError.newInternalErrorBuilder()
+                    .message("The image '%s' not found in DB.", throwable.getMessage())
+                    .errorType(ErrorType.NOT_FOUND)
+                    .path(dataFetcherExceptionHandlerParameters.getPath()).build();
+
+            DataFetcherExceptionHandlerResult result = DataFetcherExceptionHandlerResult.newResult()
+                    .error(graphqlError)
+                    .build();
+
+            log.error("thrown ImageNotFoundException");
 
             return CompletableFuture.completedFuture(result);
         } else {

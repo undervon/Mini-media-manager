@@ -1,18 +1,17 @@
 package com.aaqua.mini.media.manager.model;
 
+import com.aaqua.mini.media.manager.entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
 @Data
 @Builder
-@DynamoDbBean
 @NoArgsConstructor
 @AllArgsConstructor
-public class Image {
+public class ResponsePresignedUrl {
 
-    private String key;
+    private Image image;
     private String url;
 }
