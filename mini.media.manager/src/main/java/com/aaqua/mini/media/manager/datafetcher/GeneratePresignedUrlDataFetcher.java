@@ -39,13 +39,23 @@ public class GeneratePresignedUrlDataFetcher {
         try {
             UUID key = UUID.randomUUID();
 
-            PresignedPutObjectRequest presignedPutObjectRequest = presignedPutObject(key.toString());
+            PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(key.toString())
+                    .build();
+
+            PutObjectPresignRequest putObjectPresignRequest = PutObjectPresignRequest.builder()
+                    .signatureDuration(Duration.ofMinutes(10))
+                    .putObjectRequest(putObjectRequest)
+                    .build();
+
+            PresignedPutObjectRequest presignedPutObjectRequest = s3Presigner.presignPutObject(putObjectPresignRequest);
 
             URL url = presignedPutObjectRequest.url();
 
             Image image = Image.builder()
                     .id(key.toString())
-                    .path("")
+                    .path(url.toString().replace(url.getQuery(), ""))
                     .status(Status.PENDING)
                     .build();
 
@@ -59,19 +69,5 @@ public class GeneratePresignedUrlDataFetcher {
             log.error(s3Exception.awsErrorDetails().errorMessage());
             throw new GenericException();
         }
-    }
-
-    private PresignedPutObjectRequest presignedPutObject(String key) {
-        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
-
-        PutObjectPresignRequest putObjectPresignRequest = PutObjectPresignRequest.builder()
-                .signatureDuration(Duration.ofMinutes(10))
-                .putObjectRequest(putObjectRequest)
-                .build();
-
-        return s3Presigner.presignPutObject(putObjectPresignRequest);
     }
 }
