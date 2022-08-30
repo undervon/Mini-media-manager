@@ -5,11 +5,16 @@ type Query {
 
 type Mutation {
     login(credentials: Credentials!): String!
-    addPost(addPostInput: AddPostInput!): Post!
     addUser(credentials: Credentials!): User!
+
+    addPost(addPostInput: AddPostInput!): Post!
     deletePosts: String!
     deletePostById(id: String!): String!
+
     generatePresignedUrl: ResponsePresignedUrl!
+
+    sendSqsMessage(message: String!): String!
+    receiveAndDeleteSqsMessage: String!
 }
 
 # Login

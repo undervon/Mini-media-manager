@@ -23,8 +23,8 @@ Amazon S3:
 Amazon SQS:
 * aws sqs create-queue --queue-name MediaQueue.fifo --attributes FifoQueue=true --endpoint-url http://localhost:4566 -> creating a FIFO Queue in sqs
 * aws sqs list-queues --endpoint-url http://localhost:4566 -> list all queues
-* aws sqs send-message --queue-url http://localhost:4566/000000000000/MediaQueue.fifo --message-body "First message" --message-group-id media --message-deduplication-id first --endpoint-url http://localhost:4566 -> send a message
-* aws sqs send-message --queue-url http://localhost:4566/000000000000/MediaQueue.fifo --message-body "Second message" --message-group-id media --message-deduplication-id second --endpoint-url http://localhost:4566 -> send one more message
+* aws sqs send-message --queue-url http://localhost:4566/000000000000/MediaQueue.fifo --message-body "First message" --message-group-id media --endpoint-url http://localhost:4566 -> send a message
+* aws sqs send-message --queue-url http://localhost:4566/000000000000/MediaQueue.fifo --message-body "Second message" --message-group-id media --endpoint-url http://localhost:4566 -> send one more message
 * aws sqs receive-message --queue-url http://localhost:4566/000000000000/MediaQueue.fifo --endpoint-url http://localhost:4566 -> receive a message
 
 Amazon DynamoDB:

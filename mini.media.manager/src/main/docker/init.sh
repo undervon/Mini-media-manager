@@ -35,7 +35,7 @@ aws s3 ls \
 echo "########### Creating SQS Queue ###########"
 aws sqs create-queue \
   --queue-name $QUEUE_NAME \
-  --attributes FifoQueue=true \
+  --attributes FifoQueue=true,ContentBasedDeduplication=true \
   --endpoint-url $LOCALSTACK_URL
 
 echo "########### List SQS queues ###########"
@@ -59,8 +59,8 @@ aws s3api put-bucket-notification-configuration \
 
 echo "########### Get S3 bucket notification configurations ###########"
 aws s3api get-bucket-notification-configuration \
-    --bucket $BUCKET_NAME \
-    --endpoint-url $LOCALSTACK_URL
+  --bucket $BUCKET_NAME \
+  --endpoint-url $LOCALSTACK_URL
 
 sleep 1
 echo "########### Creating DynamoDB tables ###########"
