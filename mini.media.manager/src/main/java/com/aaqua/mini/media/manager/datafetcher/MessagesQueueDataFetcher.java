@@ -24,9 +24,6 @@ public class MessagesQueueDataFetcher {
 
     private final SqsAsyncClient sqsAsyncClient;
 
-    @Value("${aws.sqs.groupId}")
-    private String messageGroupId;
-
     @Value("${aws.sqs.queueUrl}")
     private String queueUrl;
 
@@ -38,7 +35,6 @@ public class MessagesQueueDataFetcher {
             SendMessageRequest sendMessageRequest = SendMessageRequest.builder()
                     .queueUrl(queueUrl)
                     .messageBody(message)
-                    .messageGroupId(messageGroupId)
                     .build();
             sqsAsyncClient.sendMessage(sendMessageRequest);
         } catch (SqsException sqsException) {

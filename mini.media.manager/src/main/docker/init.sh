@@ -19,7 +19,7 @@ sleep 1
 echo "########### Setting localstack URL and S3 and SQS and DynamoDB tables names as env variables ###########"
 LOCALSTACK_URL=http://localhost:4566
 BUCKET_NAME=media-bucket
-QUEUE_NAME=MediaQueue.fifo
+QUEUE_NAME=MediaQueue
 POST_TABLE_NAME=Post
 USER_TABLE_NAME=User
 IMAGE_TABLE_NAME=Image
@@ -35,7 +35,6 @@ aws s3 ls \
 echo "########### Creating SQS Queue ###########"
 aws sqs create-queue \
   --queue-name $QUEUE_NAME \
-  --attributes FifoQueue=true,ContentBasedDeduplication=true \
   --endpoint-url $LOCALSTACK_URL
 
 echo "########### List SQS queues ###########"
