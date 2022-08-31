@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "2d1e2d6e-2b30-4fd8-8cfa-8f23ee1dfeb0",
+		"name": "Mini Media Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18624058"
+	},
+	"item": [
+		{
+			"name": "Add new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation AddNewUser($credentialsInput: Credentials!) {\n    addUser (credentials: $credentialsInput) {\n        id\n        email\n        password\n    }\n}",
+						"variables": "{\n    \"credentialsInput\": {\n        \"email\": \"\",\n        \"password\": \"\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Login ($credentialsInput: Credentials!) {\n    login(credentials: $credentialsInput)\n}",
+						"variables": "{\n    \"credentialsInput\": {\n        \"email\": \"\",\n        \"password\": \"\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation AddNewPost($addNewPostInput: AddPostInput!) {\n    addPost (addPostInput: $addNewPostInput) {\n        id\n        title\n        attachments {\n            id\n            path\n            status\n        }\n        description\n    }\n}",
+						"variables": "{\n    \"addNewPostInput\": {\n        \"title\": \"\",\n        \"description\": \"\",\n        \"attachments\": [\n            \"\",\n            \"\"\n        ]\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetAllPosts {\n    getPosts {\n        id\n        title\n        attachments {\n            id\n            path\n            status\n        }\n        description\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get post by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetPostById {\n    getPost(id: \"e50047ef-6729-4cd7-a15f-45bafcd7d0f5\") {\n        id\n        title\n        attachments {\n            id\n            path\n            status\n        }\n        description\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete post by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeletePostById {\n    deletePostById(id: \"e50047ef-6729-4cd7-a15f-45bafcd7d0f5\")\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteAllPosts {\n    deletePosts\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation GeneratePresignedUrl {\n    generatePresignedUrl {\n        image {\n            id\n            path\n            status\n        }\n        url\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sent messages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation SentMessages($addMessage: String!) {\n    sendSqsMessage(message: $addMessage)\n}",
+						"variables": "{\n    \"addMessage\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Receive and delete messages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ReceiveMessages {\n    receiveAndDeleteSqsMessage\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "user",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "c56c9fe0-36a9-4c4e-bfdc-e0245193fae4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

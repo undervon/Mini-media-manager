@@ -23,7 +23,7 @@ import java.util.UUID;
 @Log4j2
 @DgsComponent
 @RequiredArgsConstructor
-public class GeneratePresignedUrlDataFetcher {
+public class GeneratePresignedUrlDataMutation {
 
     private final S3Presigner s3Presigner;
 

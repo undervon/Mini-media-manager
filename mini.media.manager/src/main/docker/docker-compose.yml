@@ -15,14 +15,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./init.sh:/docker-entrypoint-initaws.d/init.sh
-      - ./post_table.json:/docker-entrypoint-initdb.d/post_table.json
-      - ./user_table.json:/docker-entrypoint-initdb.d/user_table.json
-      - ./image_table.json:/docker-entrypoint-initdb.d/image_table.json
   
-#  mini-media-manager:
-#    image: mini-media-manager-app
-#    container_name: Mini_media_manager_app
-#    build:
-#      context: .
-#    ports:
-#      - "8090:8090"
+  mini-media-manager:
+    image: mini-media-manager-app
+    container_name: Mini_media_manager_app
+    build:
+      context: .
+    ports:
+      - "8090:8090"

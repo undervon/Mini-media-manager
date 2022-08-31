@@ -5,7 +5,6 @@ import com.aaqua.mini.media.manager.entity.Post;
 import com.aaqua.mini.media.manager.exception.GenericException;
 import com.aaqua.mini.media.manager.exception.ImageNotFoundException;
 import com.aaqua.mini.media.manager.model.AddPostInput;
-import com.aaqua.mini.media.manager.model.enums.Status;
 import com.aaqua.mini.media.manager.repository.ImageRepository;
 import com.aaqua.mini.media.manager.repository.PostRepository;
 import com.netflix.graphql.dgs.DgsComponent;
@@ -23,7 +22,7 @@ import java.util.UUID;
 @Log4j2
 @DgsComponent
 @RequiredArgsConstructor
-public class AddPostDataFetcher {
+public class AddPostDataMutation {
 
     private final PostRepository postRepository;
     private final ImageRepository imageRepository;
@@ -38,10 +37,6 @@ public class AddPostDataFetcher {
             for (String attachment : addPostInput.getAttachments()) {
                 Image image = imageRepository.findImageById(attachment)
                         .orElseThrow(() -> new ImageNotFoundException(attachment));
-
-                image.setStatus(Status.ONLINE);
-
-                imageRepository.save(image);
 
                 images.add(image);
             }

@@ -26,7 +26,7 @@ import java.util.List;
 @Log4j2
 @DgsComponent
 @RequiredArgsConstructor
-public class DeletePostDataFetcher {
+public class DeletePostDataMutation {
 
     private final S3Client s3Client;
 

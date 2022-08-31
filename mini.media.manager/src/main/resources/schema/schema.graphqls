@@ -1,15 +1,21 @@
 type Query {
     getPosts: [Post!]!
     getPost(id: String!): Post!
+
+    receiveAndDeleteSqsMessage: String!
 }
 
 type Mutation {
     login(credentials: Credentials!): String!
-    addPost(addPostInput: AddPostInput!): Post!
     addUser(credentials: Credentials!): User!
+
+    addPost(addPostInput: AddPostInput!): Post!
     deletePosts: String!
     deletePostById(id: String!): String!
+
     generatePresignedUrl: ResponsePresignedUrl!
+
+    sendSqsMessage(message: String!): String!
 }
 
 # Login
