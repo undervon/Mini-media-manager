@@ -1,6 +1,8 @@
 type Query {
     getPosts: [Post!]!
     getPost(id: String!): Post!
+
+    receiveAndDeleteSqsMessage: String!
 }
 
 type Mutation {
@@ -14,7 +16,6 @@ type Mutation {
     generatePresignedUrl: ResponsePresignedUrl!
 
     sendSqsMessage(message: String!): String!
-    receiveAndDeleteSqsMessage: String!
 }
 
 # Login

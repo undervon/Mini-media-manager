@@ -2,8 +2,7 @@ package com.aaqua.mini.media.manager.datafetcher;
 
 import com.aaqua.mini.media.manager.exception.GenericException;
 import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsMutation;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.DgsQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +10,6 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
 import software.amazon.awssdk.services.sqs.model.Message;
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
-import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
 import software.amazon.awssdk.services.sqs.model.SqsException;
 
 import java.util.List;
@@ -27,24 +25,7 @@ public class MessagesQueueDataFetcher {
     @Value("${aws.sqs.queueUrl}")
     private String queueUrl;
 
-    @DgsMutation
-    public String sendSqsMessage(@InputArgument String message) {
-        log.info("sendSqsMessage, message: {}", message);
-
-        try {
-            SendMessageRequest sendMessageRequest = SendMessageRequest.builder()
-                    .queueUrl(queueUrl)
-                    .messageBody(message)
-                    .build();
-            sqsAsyncClient.sendMessage(sendMessageRequest);
-        } catch (SqsException sqsException) {
-            log.error(sqsException.awsErrorDetails().errorMessage());
-            throw new GenericException();
-        }
-        return message;
-    }
-
-    @DgsMutation
+    @DgsQuery
     public String receiveAndDeleteSqsMessage() {
         log.info("receiveAndDeleteSqsMessage");
 
