@@ -1,0 +1,6 @@
+aws:
+  s3:
+    bucketName: mini-media-manager-bucket
+  sqs:
+    queueName: MediaQueue
+    queueUrl: https://sqs.us-east-1.amazonaws.com/445628024359/${aws.sqs.queueName}

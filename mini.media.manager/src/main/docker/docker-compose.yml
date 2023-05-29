@@ -6,20 +6,12 @@ services:
     environment:
       - DEBUG=true
       - SERVICES=s3, dynamodb, sqs
-      - AWS_DEFAULT_REGION=eu-west-1
+      - AWS_DEFAULT_REGION=us-east-1
       - DOCKER_HOST=unix:///var/run/docker.sock
       - DATA_DIR=/tmp/localstack/data
     image: localstack/localstack:latest
     ports:
       - "4566:4566"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./init.sh:/docker-entrypoint-initaws.d/init.sh
-  
-  mini-media-manager:
-    image: mini-media-manager-app
-    container_name: Mini_media_manager_app
-    build:
-      context: .
-    ports:
-      - "8090:8090"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./init.sh:/etc/localstack/init/ready.d/init.sh"
